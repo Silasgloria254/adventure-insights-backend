@@ -4,11 +4,16 @@ import Company from "../models/companies.js";
 const router = Router();
 router.post("/new", async (req, res) => {
   const { name, location,description } = req.body;
+
   try {
-    const company = await Company.findOne({ title });
+    const company = await Company.findOne({ name });
+    console.log("Clicked")
+
     if (company) {
       return res.status(400).json({ message: "company already exists" });
     }
+
+
     
     const newCompany = new Company({
       name,
