@@ -3,7 +3,7 @@ import Article from "../models/articles.js";
 
 const router = Router();
 router.post("/new", async (req, res) => {
-  const { title, location, description, placestovisit, hotels, uid } = req.body;
+  const { title,coverImg,images, location, description, placestovisit, hotels, uid } = req.body;
   try {
     const article = await Article.findOne({ title });
     if (article) {
@@ -12,10 +12,12 @@ router.post("/new", async (req, res) => {
     console.log(placestovisit);
     const newArticle = new Article({
       title,
+      coverImg,
       location,
       description,
       placestovisit,
       hotels,
+      images,
       uid,
     });
     const savedArticle = await newArticle.save();
@@ -48,7 +50,7 @@ router.get("/:id", async (req, res) => {
 router.patch("/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const { title, location, description, placestovisit, hotels,images, uid } =
+    const { title,coverImg, location, description, placestovisit, hotels,images, uid } =
       req.body;
     const update = {
       title,
