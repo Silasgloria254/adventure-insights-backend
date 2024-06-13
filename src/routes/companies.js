@@ -3,7 +3,7 @@ import Company from "../models/companies.js";
 
 const router = Router();
 router.post("/new", async (req, res) => {
-  const { name, location,description } = req.body;
+  const { logo,name, location,description } = req.body;
 
   try {
     const company = await Company.findOne({ name });
@@ -16,6 +16,7 @@ router.post("/new", async (req, res) => {
 
     
     const newCompany = new Company({
+      logo,
       name,
       location,
       description,
@@ -51,9 +52,11 @@ router.get("/:id", async (req, res) => {
 router.patch("/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, location,description } = req.body;
+    const {logo, name, location,description } = req.body;
     const update = {
-      name,
+     
+      logo,
+       name,
       location,
       description,
       
